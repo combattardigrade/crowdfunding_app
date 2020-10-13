@@ -21,7 +21,7 @@ export default StyleSheet.create({
     elevation: 6,
   },
   title: {
-    fontSize: 16,
+    fontSize: 18,
     color: colors.white,
   },
 });

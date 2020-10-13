@@ -16,7 +16,7 @@ export default StyleSheet.create({
     paddingVertical: 16,
   },
   logo: {
-    height: 70,
+    height: 50,
     marginTop: 10,
   },
   kycView: {

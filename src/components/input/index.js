@@ -9,6 +9,8 @@ export default ({
   backgroundColor,
   marginBottom,
   light,
+  onChangeText,
+  secureTextEntry
 }) => {
   return (
     <View
@@ -28,6 +30,8 @@ export default ({
         }
         style={[styles.input, light && styles.lightInput]}
         placeholder={placeholder}
+        onChangeText={onChangeText}
+        secureTextEntry={secureTextEntry}
       />
     </View>
   );
