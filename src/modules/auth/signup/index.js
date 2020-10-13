@@ -18,12 +18,18 @@ import {
   backArrowIcon,
   bgImage,
   whileLogoImage,
-  kycImage
+  checkEmail
 } from '../../../constants/images';
 import { getSafeAreaStyle } from '../../../utils';
 import styles from './style';
 import Toast, { DURATION } from 'react-native-easy-toast'
+import { checkSequentialCharacters } from '../../../utils/index'
 
+// Actions
+import { saveToken } from '../../../actions/auth'
+
+// API
+import { signup } from '../../../utils/api'
 
 class Signup extends Component {
 
@@ -35,11 +41,11 @@ class Signup extends Component {
     secondName: '',
     lastName: '',
     motherLastName: '',
-    part: 2
+    part: 1
   }
 
   componentDidMount() {
-    console.log('test')
+    
   }
 
   toast = React.createRef()
@@ -64,7 +70,57 @@ class Signup extends Component {
       return
     }
 
+    if (!(/^(?=.*[\d])(?=.*[a-z])(?=.*[!@#$%^&*.?+-:;])[\w!@#$%^&*.?+-:;]{8,}$/.test(password))) {
+      this.toast.current.show('Tu contraseña debe contener al menos una letra, un número, un caracter especial y tener un mínimo de 8 caracteres de largo')
+      return
+    }
+
+    if (email === password || password.search(email) > 0) {
+      this.toast.current.show('Las contraseñas ingresadas no coinciden')
+      return
+    }
+
+    if (password === 'fibracero' || password.search('fibracero') > 0) {
+      this.toast.current.show('Tu contraseña no puede contener el nombre de la empresa')
+      return
+    }
+
+    if (!checkSequentialCharacters(password)) {
+      this.toast.current.show('Tu contraseña no puede contener más de tres caracteres numéricos o alfabéticos en forma secuencial o identicos en forma consecutiva')
+      return
+    }
+
     this.setState({ part: 2 })
+  }
+
+  handleSignupBtn = () => {
+    const { navigation, dispatch } = this.props
+    const { email, password, rpassword, firstName, secondName, lastName, motherLastName } = this.state
+
+    if (!firstName || !lastName || !motherLastName) {
+      this.toast.current.show('Ingresa tu nombre completo')
+      return
+    }
+
+    const params = {
+      email, password, rpassword, firstName, secondName, lastName, motherLastName
+    }
+
+    signup(params)
+      .then(data => data.json())
+      .then((res) => {
+        console.log(res)
+        if (res.status === 'OK') {
+          this.setState({ part: 3 })
+          return
+        }
+        this.toast.current.show(res.message)
+      })
+      .catch((err) => {
+        console.log(err)
+        this.toast.current.show('Ocurrió un error, por favor inténtalo nuevamente')
+        return
+      })
   }
 
   validateEmail(email) {
@@ -97,7 +153,7 @@ class Signup extends Component {
                 behavior={Platform.OS === 'ios' ? 'padding' : null}
                 style={styles.main}>
                 <ScrollView style={{ width: '100%' }}>
-                  <Text style={styles.title}>{this.state.part === 1 ? 'Abrir Cuenta' : 'Ingresa tu Nombre'}</Text>
+                  <Text style={styles.title}>{this.state.part === 1 ? 'Abrir Cuenta' : this.state.part === 2 ? 'Ingresa tu Nombre' : 'Verifica tu correo'}</Text>
                   {
                     this.state.part === 1
                       ?
@@ -129,41 +185,47 @@ class Signup extends Component {
                         />
                       </View>
                       :
-                      <View style={styles.bottomView}>
-                        {/* <View style={styles.kycView}>
-                          <Image style={{ height: 30 }} source={kycImage} />
-                        </View> */}
-                        <TextInput
-                          marginBottom={10}
-                          placeholder="Primer Nombre"
-                          title="Primer Nombre"
-                          required
-                          onChangeText={this.handleInputChange('firstName')}
-                        />
+                      this.state.part === 2
+                        ?
+                        <View style={styles.bottomView}>
 
-                        <TextInput
-                          marginBottom={12}
-                          placeholder="Segundo Nombre (Opcional)"
-                          title="Segundo Nombre"
-                          onChangeText={this.handleInputChange('secondName')}
-                        />
+                          <TextInput
+                            marginBottom={10}
+                            placeholder="Primer Nombre"
+                            title="Primer Nombre"
+                            required
+                            onChangeText={this.handleInputChange('firstName')}
+                          />
 
-                        <TextInput
-                          marginBottom={12}
-                          placeholder="Apellido Paterno"
-                          title="Apellido Paterno"
-                          required
-                          onChangeText={this.handleInputChange('lastName')}
-                        />
+                          <TextInput
+                            marginBottom={12}
+                            placeholder="Segundo Nombre (Opcional)"
+                            title="Segundo Nombre"
+                            onChangeText={this.handleInputChange('secondName')}
+                          />
 
-                        <TextInput
-                          marginBottom={12}
-                          placeholder="Apellido Materno"
-                          title="Apellido Materno"
-                          required
-                          onChangeText={this.handleInputChange('motherLastName')}
-                        />
-                      </View>
+                          <TextInput
+                            marginBottom={12}
+                            placeholder="Apellido Paterno"
+                            title="Apellido Paterno"
+                            required
+                            onChangeText={this.handleInputChange('lastName')}
+                          />
+
+                          <TextInput
+                            marginBottom={12}
+                            placeholder="Apellido Materno"
+                            title="Apellido Materno"
+                            required
+                            onChangeText={this.handleInputChange('motherLastName')}
+                          />
+                        </View>
+                        :
+                        <View style={[styles.bottomView, { alignItems: 'center' }]}>
+                          <Image style={{ height: 150, width: '100%', marginTop: 20 }} resizeMode="contain" source={checkEmail} />
+                          <Text style={{ fontSize: 18, fontWeight: 'bold', marginTop: 10 }}>¡Cuenta creada!</Text>
+                          <Text style={{ textAlign: 'center', fontSize: 16, paddingHorizontal: 20, marginTop: 5 }}>Enviamos un enlace de verificación a tu correo para verificar tu cuenta.</Text>
+                        </View>
                   }
                 </ScrollView>
                 {
@@ -175,23 +237,32 @@ class Signup extends Component {
                       title="Continuar"
                     />
                     :
-                    <Button
-                      onPress={() => navigation.navigate('Continue')}
-                      // marginBottom={10}
-                      title="Abrir Cuenta"
-                    />
-                }
-                <Toast
+                    this.state.part === 2
+                      ?
+                      < Button
+                        onPress={() => this.handleSignupBtn()}
+                        // marginBottom={10}
+                        title="Abrir Cuenta"
+                      />
+                      :
+                      <Button
+                        onPress={() => navigation.navigate('Login')}
+                        // marginBottom={10}
+                        title="Ir a Iniciar sesión"
+                      />
+                }                
+              </KeyboardAvoidingView>
+              <Toast
                   ref={this.toast}
                   style={{ backgroundColor: '#FF3366', paddingVertical: 10, paddingHorizontal: 20 }}
                   position='top'
-                  positionValue={-120}
+                  positionValue={30}
                   fadeInDuration={250}
-                  fadeOutDuration={2000}
+                  fadeOutDuration={3000}
                   opacity={1}
                   textStyle={{ color: 'white', fontSize: 16 }}
+
                 />
-              </KeyboardAvoidingView>
             </ImageBackground>
           )
         }

@@ -4,6 +4,7 @@ export const blackLogoImage = require('../assets/blackLogo.png');
 export const backArrowIcon = require('../assets/arrow_back_ios_24px.png');
 export const kycImage = require('../assets/kyc.png');
 export const contactImage = require('../assets/contact.png');
+export const checkEmail = require('../assets/investor_documents.png')
 // arrow_back_ios_24px.png
 
 // bottom tab
