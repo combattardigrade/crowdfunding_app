@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 import {View} from 'react-native';
-import {colors} from '../../constants/colors';
+import {colors} from '../../../constants/colors';
 
 export default memo(({color, marginBottom, marginTop}) => {
   return (

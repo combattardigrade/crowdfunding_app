@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, TextInput} from 'react-native';
-import {colors} from '../../constants/colors';
+import {colors} from '../../../constants/colors';
 import styles from './style';
 export default ({
   title,

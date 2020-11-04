@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {colors} from '../../constants/colors';
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../constants/colors'
 export default StyleSheet.create({
   container: {
     width: '100%',
@@ -13,14 +13,14 @@ export default StyleSheet.create({
     shadowOpacity: 0.27,
     shadowRadius: 4.65,
     elevation: 6,
-    marginTop:10,
-    marginBottom:10,
+    marginTop: 10,
+    marginBottom: 10,
   },
-  lowerTxt:{
-    fontSize:14
+  lowerTxt: {
+    fontSize: 14
   },
-  flex:{
-    flex:1
+  flex: {
+    flex: 1
   },
   title: {
     fontSize: 16,
@@ -30,15 +30,15 @@ export default StyleSheet.create({
     fontSize: 11,
     opacity: 0.6,
   },
-  normalTxt:{
+  normalTxt: {
     fontSize: 16,
   },
-  smallTxt:{
+  smallTxt: {
     fontSize: 10,
 
   },
-  img:{
-      width:'100%',
-      height:130
+  img: {
+    width: '100%',
+    height: 130
   }
 });

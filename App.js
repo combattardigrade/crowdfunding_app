@@ -8,7 +8,7 @@ import reducer from './src/reducers'
 import middleware from './src/middleware'
 
 import React, { Component } from 'react'
-import CrowdFunding from './src/navigation'
+import Navigation from './src/navigation/Navigation'
 import { StatusBar } from 'react-native'
 import { colors } from './src/constants/colors'
 
@@ -33,7 +33,7 @@ class App extends Component {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <StatusBar backgroundColor={colors.primaryDark} />
-          <CrowdFunding />
+          <Navigation />
         </PersistGate>
       </Provider>
     )
