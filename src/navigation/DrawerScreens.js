@@ -160,7 +160,7 @@ function BottomTabsScreens() {
                         return (
                             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                                 <IconMaterialCommunity name="chart-pie" size={25} color={focused ? colors.primaryBlue : '#B9BDBE'} />
-                                <Text style={{ fontSize: 10, marginTop: 0, fontWeight: 'bold', color: focused ? colors.primaryBlue : 'grey' }}>Cuenta</Text>
+                                <Text style={{ fontSize: 10, marginTop: 0, fontWeight: 'bold', color: focused ? colors.primaryBlue : 'grey' }}>Portafolio</Text>
                             </View>
                         )
                     }

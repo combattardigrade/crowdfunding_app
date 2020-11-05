@@ -6,11 +6,15 @@ import DashboardItem from '../components/dashboardItem';
 import { colors } from '../../constants/colors'
 
 // API
-import { getAllProjectsByStatusAndPage, getUserData } from '../../utils/api'
+import { 
+    getAllProjectsByStatusAndPage, getUserData,
+    getPlatformPublicSettings
+ } from '../../utils/api'
 
 // Actions
 import { saveProjects, removeProjects } from '../../actions/projects'
 import { saveUserData, removeUserData } from '../../actions/user'
+import { savePublicSettings } from '../../actions/settings'
 
 class Dashboard extends Component {
 
@@ -61,6 +65,14 @@ class Dashboard extends Component {
                     dispatch(saveProjects(projects))
                 }
             })
+
+            getPlatformPublicSettings()
+                .then(data => data.json())
+                .then((res) => {
+                    if(res.status === 'OK') {
+                        dispatch(savePublicSettings(res.payload))
+                    }
+                })
     }
 
     render() {
