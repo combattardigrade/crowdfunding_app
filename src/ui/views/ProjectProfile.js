@@ -40,7 +40,7 @@ class Project extends Component {
                     <Fragment>
                         <ScrollView style={styles.bg} >
                             <View style={styles.container}>
-                                <ProjectHeader title={project.projectTitle} />
+                                <ProjectHeader title={project.projectTitle} project={project} />
                                 <View style={styles.main}>
                                     <Text style={styles.lgTxt}>{project.projectTitle}</Text>
                                     <Row marginBottom={30}>
@@ -62,11 +62,11 @@ class Project extends Component {
                                             <Text style={[styles.smTxt, { fontSize: 10 }]}>{currencyFormatter.format(project.amountRaised, { code: 'USD' })}</Text>
                                         </View>
                                         <View style={styles.flex}>
-                                            <Text style={[styles.smTxt, { fontSize: 10 }]}>Recaudado</Text>
+                                            <Text style={[styles.smTxt, { fontSize: 10 }]}>Meta Min.</Text>
                                             <Text style={[styles.smTxt, { fontSize: 10 }]}>{currencyFormatter.format(project.minAmount, { code: 'USD' })}</Text>
                                         </View>
                                         <View style={styles.flex}>
-                                            <Text style={[styles.smTxt, { fontSize: 10 }]}>Recaudado</Text>
+                                            <Text style={[styles.smTxt, { fontSize: 10 }]}>Meta Max.</Text>
                                             <Text style={[styles.smTxt, { fontSize: 10 }]}>{currencyFormatter.format(project.maxAmount, { code: 'USD' })}</Text>
                                         </View>
                                     </Row>
@@ -77,11 +77,11 @@ class Project extends Component {
                                     
                                     <Line marginTop={10} marginBottom={30} />
                                     
-                                    <TableSection />
+                                    <TableSection project={project} />
                                     
                                     <Line marginTop={10} marginBottom={20} />
                                     
-                                    <ProjectTabs />
+                                    <ProjectTabs project={project} />
                                 </View>
                             </View>
                         </ScrollView>

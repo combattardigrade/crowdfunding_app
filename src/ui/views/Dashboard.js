@@ -9,21 +9,28 @@ import { colors } from '../../constants/colors'
 import { getAllProjectsByStatusAndPage } from '../../utils/api'
 
 // Actions
-import { saveProjects } from '../../actions/projects'
+import { saveProjects, removeProjects } from '../../actions/projects'
 
 class Dashboard extends Component {
 
     componentDidMount() {
 
         const { token, dispatch, navigation } = this.props
-       
+
+        dispatch(removeProjects())
 
         getAllProjectsByStatusAndPage({ status: 'ACTIVE', page: 1, token })
             .then(data => data.json())
             .then((res) => {
                 console.log(res)
                 if (res.status === 'OK') {
-                    dispatch(saveProjects(res.payload))
+                    const projects = {}
+                    for (let p of res.payload) {
+                        projects[p.id] = {
+                            ...p
+                        }
+                    }
+                    dispatch(saveProjects(projects))
                 }
             })
 
@@ -32,7 +39,13 @@ class Dashboard extends Component {
             .then((res) => {
                 console.log(res)
                 if (res.status === 'OK') {
-                    dispatch(saveProjects(res.payload))
+                    const projects = {}
+                    for (let p of res.payload) {
+                        projects[p.id] = {
+                            ...p
+                        }
+                    }
+                    dispatch(saveProjects(projects))
                 }
             })
     }
@@ -40,7 +53,7 @@ class Dashboard extends Component {
     render() {
 
         const { projects, navigation } = this.props
-       
+
         return (
             <ScrollView style={styles.bg}>
                 <View style={styles.container}>
