@@ -84,11 +84,6 @@ class Campana extends Component {
           ))
         }
 
-
-
-
-
-
         <Text style={[styles.smTxt, { paddingVertical: 10 }]}>
           {project?.longDescription}
         </Text>
