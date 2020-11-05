@@ -1,12 +1,12 @@
-import {StyleSheet} from 'react-native';
-import {colors} from '../../constants/colors';
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../constants/colors';
 export default StyleSheet.create({
   container: {
     width: '100%',
     flexDirection: 'row',
     // backgroundColor: colors.white,
     borderRadius: 10,
-    
+
     marginTop: 10,
     marginBottom: 10,
   },

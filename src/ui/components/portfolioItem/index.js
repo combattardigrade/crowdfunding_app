@@ -1,14 +1,14 @@
-import React, {memo} from 'react';
-import {View, Text, Image} from 'react-native';
+import React, { memo } from 'react';
+import { View, Text, Image } from 'react-native';
 import styles from './style';
-import {colors} from '../../constants/colors';
+import { colors } from '../../../constants/colors'
 const img =
   'https://images.pexels.com/photos/2581922/pexels-photo-2581922.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500';
-  
-export default memo(({title}) => {
+
+export default memo(({ title }) => {
   return (
     <View style={[styles.container]}>
-      <Image style={styles.img} source={{uri: img}} />
+      <Image style={styles.img} source={{ uri: img }} />
       <View>
         <Text style={styles.title}>Desarrollo Alfa</Text>
         <View style={[styles.row]}>
@@ -29,7 +29,7 @@ export default memo(({title}) => {
             <Text
               style={[
                 styles.smallTxt,
-                {color: colors.primaryBlue, fontWeight: 'bold'},
+                { color: colors.primaryBlue, fontWeight: 'bold' },
               ]}>
               Activo
             </Text>

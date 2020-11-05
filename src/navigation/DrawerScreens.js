@@ -25,6 +25,7 @@ const Drawer = createDrawerNavigator()
 
 // Views
 import Dashboard from '../ui/views/Dashboard'
+import Account from '../ui/views/Account'
 import Settings from '../ui/views/Settings'
 import Contact from '../ui/views/Contact'
 
@@ -143,7 +144,6 @@ function BottomTabsScreens() {
                 component={Dashboard}
                 options={{
                     tabBarIcon: ({ focused }) => {
-
                         return (
                             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                                 <IconMaterialCommunity name="trending-up" size={25} color={focused ? colors.primaryBlue : '#B9BDBE'} />
@@ -153,7 +153,7 @@ function BottomTabsScreens() {
                     },
                 }}
             />
-            <Tab.Screen name="Account" component={Dashboard}
+            <Tab.Screen name="Account" component={Account}
                 options={{
                     tabBarIcon: ({ focused }) => {
 
