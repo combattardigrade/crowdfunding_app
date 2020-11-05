@@ -4,9 +4,9 @@ import styles from './style';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { colors } from '../../../constants/colors'
 
-export default memo(({ blue, gray, img, title, subtitle }) => {
+export default memo(({ blue, gray, img, title, subtitle, onPress }) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.row}>
         <View style={styles.icon}>
           <Image source={img} />

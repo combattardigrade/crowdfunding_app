@@ -26,8 +26,8 @@ class Settings extends Component {
     };
 
     render() {
-        const { user } = this.props
-       
+        const { user, navigation } = this.props
+
         return (
             <ScrollView style={styles.bg}>
                 <View style={styles.container}>
@@ -43,36 +43,42 @@ class Settings extends Component {
                         title='Datos personales'
                         subtitle={user?.personalInfoStatus === 'COMPLETED' ? 'Completedo' : 'Pendiente'}
                         blue={user?.personalInfoStatus === 'COMPLETED' ? true : false}
+                        onPress={() => navigation.navigate('PersonalInfo')}
                     />
                     <ListItem
                         img={room_24px}
                         title='Dirección'
                         subtitle={user?.addressStatus === 'COMPLETED' ? 'Completedo' : 'Pendiente'}
                         blue={user?.addressStatus === 'COMPLETED' ? true : false}
+                        onPress={() => navigation.navigate('Address')}
                     />
                     <ListItem
                         img={account_balance_24px}
                         title='Cuenta bancaria'
                         subtitle={user?.bankAccountStatus === 'COMPLETED' ? 'Completedo' : 'Pendiente'}
                         blue={user?.bankAccountStatus === 'COMPLETED' ? true : false}
+                        onPress={() => navigation.navigate('BankAccount')}
                     />
                     <ListItem
                         img={portrait_24px}
                         title='Conocimiento del inversionista'
                         subtitle={user?.investorKnowledgeStatus === 'COMPLETED' ? 'Completedo' : 'Pendiente'}
                         blue={user?.investorKnowledgeStatus === 'COMPLETED' ? true : false}
+                        onPress={() => navigation.navigate('InvestorKnowledge')}
                     />
                     <ListItem
                         img={wc_24px}
                         title='Beneficiarios'
                         subtitle={user?.beneficiariesStatus === 'COMPLETED' ? 'Completedo' : 'Pendiente'}
                         blue={user?.beneficiariesStatus === 'COMPLETED' ? true : false}
+                        onPress={() => navigation.navigate('Beneficiaries')}
                     />
                     <ListItem
                         img={zoom_in_24px}
                         title='Conocimiento de riesgos'
                         subtitle={user?.risksKnowledgeStatus === 'COMPLETED' ? 'Completedo' : 'Pendiente'}
                         blue={user?.risksKnowledgeStatus === 'COMPLETED' ? true : false}
+                        onPress={() => navigation.navigate('RiskKnowledge')}
                     />
 
 
@@ -84,6 +90,7 @@ class Settings extends Component {
                         title='Contraseña'
                         subtitle='Cambiar contraseña'
                         gray={true}
+                        onPress={() => navigation.navigate('ChangePassword')}
                     />
 
                     <ListItem
@@ -91,6 +98,7 @@ class Settings extends Component {
                         title='Email'
                         subtitle='Cambiar correo electrónico'
                         gray={true}
+                        onPress={() => navigation.navigate('ChangeEmail')}
                     />
                     <View style={styles.box} />
                 </View>
