@@ -1,7 +1,25 @@
-import {StyleSheet} from 'react-native';
-import {colors} from '../../constants/colors';
+import React, { memo } from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
+// import { styles } from './style';
+import { userIcon } from '../constants/images';
+import { colors } from '../constants/colors';
 
-export const styles = StyleSheet.create({
+export default memo(() => {
+  return (
+    <View style={styles.profileCont}>
+      <View style={styles.avatar}>
+        <Image source={userIcon} style={styles.avatarIcon} />
+      </View>
+      <View style={styles.user}>
+        <Text style={styles.userName}>Juan Pérez</Text>
+        <Text style={styles.bio}>Verificación completada</Text>
+      </View>
+    </View>
+  );
+});
+
+
+const styles = StyleSheet.create({
   profileCont: {
     height: 235,
     paddingTop: 73,
@@ -53,6 +71,6 @@ export const styles = StyleSheet.create({
     height: 24,
   },
   iconCont: {
-      width: 50
+    width: 50
   }
 });

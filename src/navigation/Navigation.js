@@ -11,7 +11,8 @@ import DrawerScreens from './DrawerScreens'
 import Intro from '../ui/views/Intro'
 import Login from '../ui/views/Login'
 import Signup from '../ui/views/Signup'
-import Dashboard from '../ui/views/Dashboard'
+import ProjectProfile from '../ui/views/ProjectProfile'
+
 
 // import BackgroundTimer from 'react-native-background-timer'
 
@@ -72,7 +73,8 @@ class Navigation extends Component {
                             </Fragment>
                             :
                             <Fragment>
-                                <Stack.Screen name="Dashboard" component={Dashboard} options={{ header: () => null }} />
+                                <Stack.Screen name="Dashboard" component={DrawerScreens} options={{ header: () => null }} />
+                                <Stack.Screen name="ProjectProfile" component={ProjectProfile} options={{ header: () => null }} />
                             </Fragment>
                     }
                 </Stack.Navigator>

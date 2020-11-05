@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity, Linking, Alert, Platform } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity, FlatList, Linking, Alert, Platform } from 'react-native'
 
 // Views
 
@@ -8,12 +8,23 @@ import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity, Linking, A
 import IconMaterialCommunity from 'react-native-vector-icons/MaterialCommunityIcons'
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome5'
 import IconMaterial from 'react-native-vector-icons/MaterialIcons'
+import IonIcons from 'react-native-vector-icons/Ionicons'
+
+import {
+    cuenta
+} from '../constants/images'
+import { colors } from '../constants/colors';
 
 // Navigation
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { drawerItems } from './drawerItems';
+import Profile from './profile';
 const Tab = createBottomTabNavigator()
 const Drawer = createDrawerNavigator()
+
+// Views
+import Dashboard from '../ui/views/Dashboard'
 
 
 class DrawerScreens extends Component {
@@ -32,51 +43,33 @@ class DrawerScreens extends Component {
         // })
     }
 
+    _renderItem = ({ item }) => {
+        return (
+            <TouchableOpacity activeOpacity={0.9} style={styles.sideBarItem}>
+                <View style={styles.iconCont}>
+                    <Image source={item.icon} style={styles.itemIcon} />
+                </View>
+                <View>
+                    <Text>{item.title}</Text>
+                </View>
+            </TouchableOpacity>
+        );
+    };
+
     render() {
         return (
             <Drawer.Navigator
-
                 drawerContent={(props) => {
                     return (
-                        <View style={{ marginTop: 40 }}>
-                            
-                            <TouchableOpacity onPress={() => Alert.alert('Alert', 'Coming soon!', [{ text: 'OK' }])}>
-                                <View style={styles.drawerMenuContainer}>
-                                    <IconMaterialCommunity name='lock' size={25} color='black' />
-                                    <Text style={styles.drawerMenuText}>Change PIN</Text>
-                                </View>
-                            </TouchableOpacity>
-                            
-                            <TouchableOpacity onPress={() => Linking.openURL('https://blits.net')}>
-                                <View style={styles.drawerMenuContainer}>
-                                    <IconMaterialCommunity name='gift-outline' size={25} color='black' />
-                                    <Text style={styles.drawerMenuText}>Free ONE</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => Linking.openURL('https://blits.net')}>
-                                <View style={styles.drawerMenuContainer}>
-                                    <IconMaterialCommunity name='lightning-bolt' size={25} color='black' />
-                                    <Text style={styles.drawerMenuText}>Blits.net</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => Linking.openURL('tg://resolve?domain=blits_community')}>
-                                <View style={styles.drawerMenuContainer}>
-                                    <IconMaterialCommunity name='telegram' size={25} color='black' />
-                                    <Text style={styles.drawerMenuText}>Telegram Group</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => Linking.openURL('https://blits.net/terms')}>
-                                <View style={styles.drawerMenuContainer}>
-                                    <IconMaterialCommunity name='file-document' size={25} color='black' />
-                                    <Text style={styles.drawerMenuText}>Terms & Conditions</Text>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.handleLogoutBtn()}>
-                                <View style={styles.drawerMenuContainer}>
-                                    <IconMaterialCommunity name='logout-variant' size={25} color='black' />
-                                    <Text style={styles.drawerMenuText}>Logout</Text>
-                                </View>
-                            </TouchableOpacity>
+                        <View>
+                            <Profile />
+                            <View style={{ paddingTop: 20, paddingHorizontal: 15, }}>
+                                <FlatList
+                                    data={drawerItems}
+                                    keyExtractor={(_, index) => index.toString()}
+                                    renderItem={this._renderItem}
+                                />
+                            </View>
                         </View>
                     )
                 }}
@@ -104,7 +97,19 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontFamily: 'Poppins-Regular',
         paddingLeft: 10
-
+    },
+    sideBarItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        height: 40,
+        marginTop: 10,
+    },
+    itemIcon: {
+        width: 24,
+        height: 24,
+    },
+    iconCont: {
+        width: 50
     }
 })
 
@@ -133,68 +138,54 @@ function BottomTabsScreens() {
             }
             }>
             <Tab.Screen
-                name="WALLET"
-                component={WalletView}
+                name="INVEST"
+                component={Dashboard}
                 options={{
                     tabBarIcon: ({ focused }) => {
 
                         return (
                             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                                <IconFontAwesome name="wallet" size={20} color={focused ? 'black' : '#B9BDBE'} />
-                                <Text style={{ fontSize: 10, marginTop: 2, fontWeight: 'bold', color: focused ? '#000' : 'grey', fontFamily: 'Poppins-Regular' }}>WALLET</Text>
+                                <IconMaterialCommunity name="trending-up" size={25} color={focused ? colors.primaryBlue : '#B9BDBE'} />
+                                <Text style={{ fontSize: 10, marginTop: 0, fontWeight: 'bold', color: focused ? colors.primaryBlue : 'grey' }}>Invertir</Text>
                             </View>
                         );
                     },
                 }}
             />
-            {/* <Tab.Screen name="ACTIVITY" component={WalletView}
-          options={{
-            tabBarIcon: ({ focused }) => {
-              const image = focused ? require('./assets/images/activity-active.png')
-                : require('./assets/images/activity.png')
-              return (
-                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                  <Image resizeMode='contain' style={{ height: 18 }} source={image} />
-                  <Text style={{ fontSize: 9, marginTop: 1, fontWeight: 'bold', color: focused ? '#000' : 'grey', fontFamily: 'Poppins-Regular' }}>ACTIVITY</Text>
-                </View>
-              );
-            }
-          }}
-        /> */}
-            <Tab.Screen name="LOANS" component={LoansView}
+            <Tab.Screen name="Account" component={Dashboard}
                 options={{
                     tabBarIcon: ({ focused }) => {
 
                         return (
                             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                                <IconMaterialCommunity name="trending-up" size={25} color={focused ? 'black' : '#B9BDBE'} />
-                                <Text style={{ fontSize: 10, marginTop: 0, fontWeight: 'bold', color: focused ? '#000' : 'grey', fontFamily: 'Poppins-Regular' }}>LOANS</Text>
+                                <IconMaterialCommunity name="chart-pie" size={25} color={focused ? colors.primaryBlue : '#B9BDBE'} />
+                                <Text style={{ fontSize: 10, marginTop: 0, fontWeight: 'bold', color: focused ? colors.primaryBlue : 'grey' }}>Cuenta</Text>
                             </View>
                         )
                     }
                 }}
             />
-            <Tab.Screen name="CONTACTS" component={WalletView}
+            <Tab.Screen name="Settings" component={Dashboard}
                 options={{
                     tabBarIcon: ({ focused }) => {
 
                         return (
                             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                                <IconMaterial name="people" size={25} color={focused ? 'black' : '#B9BDBE'} />
-                                <Text style={{ fontSize: 10, marginTop: 1, fontWeight: 'bold', color: focused ? '#000' : 'grey', fontFamily: 'Poppins-Regular' }}>CONTACTS</Text>
+                                <IconMaterial name="settings" size={25} color={focused ? colors.primaryBlue : '#B9BDBE'} />
+                                <Text style={{ fontSize: 10, marginTop: 0, fontWeight: 'bold', color: focused ? colors.primaryBlue : 'grey' }}>Ajustes</Text>
                             </View>
                         )
                     }
                 }}
             />
-            <Tab.Screen name="PROFILE" component={WalletView}
+            <Tab.Screen name="Contact" component={Dashboard}
                 options={{
                     tabBarIcon: ({ focused }) => {
 
                         return (
                             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                                <IconMaterialCommunity name="account-circle" size={25} color={focused ? 'black' : '#B9BDBE'} />
-                                <Text style={{ fontSize: 10, marginTop: 1, fontWeight: 'bold', color: focused ? '#000' : 'grey', fontFamily: 'Poppins-Regular' }}>PROFILE</Text>
+                                <IconMaterialCommunity name="message-outline" size={25} color={focused ? colors.primaryBlue : '#B9BDBE'} />
+                                <Text style={{ fontSize: 10, marginTop: 0, fontWeight: 'bold', color: focused ? colors.primaryBlue : 'grey' }}>Contacto</Text>
                             </View>
                         )
                     }

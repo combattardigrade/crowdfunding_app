@@ -1,9 +1,9 @@
-import React, {memo} from 'react';
+import React, { memo } from 'react';
 import {
   View,
   Text,
 } from 'react-native';
-import Row from '../../components/row';
+import Row from '../row';
 import styles from './style';
 
 export default memo(() => {

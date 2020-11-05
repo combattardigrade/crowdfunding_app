@@ -1,7 +1,7 @@
 import React,{memo} from 'react'
 import {View} from 'react-native'
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
-import { colors } from '../../constants/colors';
+import { colors } from '../../../constants/colors';
 
 
 export default memo(()=> {

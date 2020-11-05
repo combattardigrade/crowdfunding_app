@@ -1,23 +1,23 @@
-import React, {memo, useState} from 'react';
-import {View, Dimensions} from 'react-native';
+import React, { memo, useState } from 'react';
+import { View, Dimensions } from 'react-native';
 import styles from './style';
-import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
-import {colors} from '../../constants/colors';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import { colors } from '../../../constants/colors';
 import Compana from './tabScreens/compana';
 import Details from './tabScreens/details';
 import Garantia from './tabScreens/garantia';
 import Randim from './tabScreens/randim';
 
-const initialLayout = {width: Dimensions.get('window').width};
+const initialLayout = { width: Dimensions.get('window').width };
 
 export default memo(() => {
   const [index, setIndex] = useState(0);
   const [dynamic_height, setDynamic] = useState(1600);
   const [routes] = useState([
-    {key: 'first', title: 'Campaña'},
-    {key: 'second', title: 'Garantía'},
-    {key: 'third', title: 'Detalles'},
-    {key: 'four', title: 'Rendimiento'},
+    { key: 'first', title: 'Campaña' },
+    { key: 'second', title: 'Garantía' },
+    { key: 'third', title: 'Detalles' },
+    { key: 'four', title: 'Rendimiento' },
   ]);
 
   const renderScene = SceneMap({
@@ -51,7 +51,7 @@ export default memo(() => {
   return (
     <View style={styles.tabView}>
       <TabView
-        style={{height: dynamic_height}}
+        style={{ height: dynamic_height }}
         renderTabBar={(props) => (
           <TabBar
             {...props}
@@ -59,11 +59,11 @@ export default memo(() => {
             labelStyle={styles.labelStyle}
             inactiveColor="rgba(0,0,0,.4)"
             activeColor={colors.primaryDark}
-            style={{backgroundColor: 'transparent'}}
+            style={{ backgroundColor: 'transparent' }}
             indicatorStyle={styles.indicator}
           />
         )}
-        navigationState={{index, routes}}
+        navigationState={{ index, routes }}
         renderScene={renderScene}
         onIndexChange={_onTabChange}
         initialLayout={initialLayout}

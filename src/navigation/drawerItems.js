@@ -7,7 +7,7 @@ import {
   session,
   pagos,
   termino,
-} from '../../constants/images';
+} from '../constants/images';
 
 export const drawerItems = [
   {title: 'Historial de inversions', navigation: 'Cuenta', icon: historial},

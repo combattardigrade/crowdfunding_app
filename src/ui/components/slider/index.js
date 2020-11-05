@@ -3,7 +3,7 @@ import {Dimensions} from 'react-native';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import CustomMarker from './CustomMarker';
 import CustomLabel from './CustomLabel';
-import { colors } from '../../constants/colors';
+import { colors } from '../../../constants/colors';
 const width = Dimensions.get('screen').width-30;
 export default memo(() => {
   return (

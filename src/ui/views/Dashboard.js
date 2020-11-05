@@ -15,7 +15,8 @@ class Dashboard extends Component {
 
     componentDidMount() {
 
-        const { token, dispatch } = this.props
+        const { token, dispatch, navigation } = this.props
+       
 
         getAllProjectsByStatusAndPage({ status: 'ACTIVE', page: 1, token })
             .then(data => data.json())
@@ -38,7 +39,7 @@ class Dashboard extends Component {
 
     render() {
 
-        const { projects } = this.props
+        const { projects, navigation } = this.props
        
         return (
             <ScrollView style={styles.bg}>
@@ -47,7 +48,7 @@ class Dashboard extends Component {
                     <Text style={styles.title}>Oportunidades de Inversión</Text>
                     {
                         Object.values(projects).filter(p => p.status === 'ACTIVE').map((p, i) => (
-                            <DashboardItem key={i} project={p} />
+                            <DashboardItem key={i} project={p} navigation={navigation} />
                         ))
                     }
                 </View>

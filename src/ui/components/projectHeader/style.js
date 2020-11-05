@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {colors} from '../../constants/colors';
+import { StyleSheet } from 'react-native';
+import { colors } from '../../../constants/colors';
 
 export default StyleSheet.create({
   container: {
@@ -9,9 +9,9 @@ export default StyleSheet.create({
     width: '100%',
     height: 300,
   },
-  iconRow:{
-    flexDirection:'row',
-    alignItems:'center'
+  iconRow: {
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   back: {
     paddingHorizontal: 20,

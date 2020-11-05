@@ -1,16 +1,16 @@
-import React, {memo} from 'react';
+import React, { memo } from 'react';
 import {
   View,
   Image,
   Text,
 } from 'react-native';
-import Row from '../../../components/row';
-import Line from '../../../components/line';
-import {descriptionTxt} from '../constants';
+import Row from '../../row';
+import Line from '../../line';
+const descriptionTxt = 'test'
 import styles from '../style';
 import Octicons from 'react-native-vector-icons/Octicons';
-import {colors} from '../../../constants/colors';
-import {blackLogoImage} from '../../../constants/images';
+import { colors } from '../../../../constants/colors';
+import { blackLogoImage } from '../../../../constants/images';
 
 export default memo(() => {
   return (
@@ -93,16 +93,16 @@ export default memo(() => {
       <Text style={[styles.heading, styles.bold]}>
         Detalles del presupuesto
       </Text>
-      <Text style={[styles.smTxt, {paddingVertical: 10}]}>
+      <Text style={[styles.smTxt, { paddingVertical: 10 }]}>
         {descriptionTxt}
       </Text>
       <Line marginTop={30} marginBottom={30} />
 
       <Text style={[styles.heading, styles.bold]}>Documentos</Text>
-      
+
       <Row marginTop={20}>
-        <Text style={[styles.smTxt,{opacity:.5}]}>Documento</Text>
-        <Text style={[styles.smTxt,{opacity:.5,width:100}]}>Ver</Text>
+        <Text style={[styles.smTxt, { opacity: .5 }]}>Documento</Text>
+        <Text style={[styles.smTxt, { opacity: .5, width: 100 }]}>Ver</Text>
       </Row>
       <Line marginTop={8} />
 
@@ -126,8 +126,8 @@ export default memo(() => {
         Responsables del proyecto
       </Text>
       <Row marginTop={20}>
-        <Text style={[styles.smTxt,{opacity:.5}]}>Nombre</Text>
-        <Text style={[styles.smTxt,{opacity:.5,width:133,textAlign:'center'}]}>Cargo</Text>
+        <Text style={[styles.smTxt, { opacity: .5 }]}>Nombre</Text>
+        <Text style={[styles.smTxt, { opacity: .5, width: 133, textAlign: 'center' }]}>Cargo</Text>
       </Row>
       <Line marginTop={8} />
 
@@ -142,9 +142,9 @@ export default memo(() => {
       </Row>
       <Line marginBottom={35} />
       <Text style={[styles.heading, styles.bold]}>Sobre el desarrollador</Text>
-      <Image style={{marginVertical: 35}} source={blackLogoImage} />
+      <Image style={{ marginVertical: 35 }} source={blackLogoImage} />
       <Text style={[styles.heading, styles.bold]}>Fibra Cero</Text>
-      <Text style={[styles.descTxt,{paddingBottom:0}]}>
+      <Text style={[styles.descTxt, { paddingBottom: 0 }]}>
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s, when an unknown printer took a galley of type and
