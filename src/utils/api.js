@@ -1,6 +1,6 @@
 import { API } from '@env'
 console.log(API)
-export function signup(params) {    
+export function signup(params) {
     return fetch(API + 'signup', {
         method: 'POST',
         body: JSON.stringify(params),
@@ -22,6 +22,16 @@ export function login(params) {
 
 export function getAllProjectsByStatusAndPage(params) {
     return fetch(API + `projects/${params.status}/${params.page}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + params.token
+        }
+    })
+}
+
+export function getUserData(params) {
+    return fetch(API + 'userProfile', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

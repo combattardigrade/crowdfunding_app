@@ -6,16 +6,29 @@ import DashboardItem from '../components/dashboardItem';
 import { colors } from '../../constants/colors'
 
 // API
-import { getAllProjectsByStatusAndPage } from '../../utils/api'
+import { getAllProjectsByStatusAndPage, getUserData } from '../../utils/api'
 
 // Actions
 import { saveProjects, removeProjects } from '../../actions/projects'
+import { saveUserData, removeUserData } from '../../actions/user'
 
 class Dashboard extends Component {
 
     componentDidMount() {
 
         const { token, dispatch, navigation } = this.props
+
+        // dispatch(removeUserData())
+
+        getUserData({ token })
+            .then(data => data.json())
+            .then((res) => {
+                console.log(res)
+                if (res.status === 'OK') {
+                    dispatch(saveUserData(res.payload))
+                }
+            })
+
 
         dispatch(removeProjects())
 

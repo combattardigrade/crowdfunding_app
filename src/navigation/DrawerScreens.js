@@ -25,7 +25,8 @@ const Drawer = createDrawerNavigator()
 
 // Views
 import Dashboard from '../ui/views/Dashboard'
-
+import Settings from '../ui/views/Settings'
+import Contact from '../ui/views/Contact'
 
 class DrawerScreens extends Component {
 
@@ -165,7 +166,7 @@ function BottomTabsScreens() {
                     }
                 }}
             />
-            <Tab.Screen name="Settings" component={Dashboard}
+            <Tab.Screen name="Settings" component={Settings}
                 options={{
                     tabBarIcon: ({ focused }) => {
 
@@ -178,7 +179,7 @@ function BottomTabsScreens() {
                     }
                 }}
             />
-            <Tab.Screen name="Contact" component={Dashboard}
+            <Tab.Screen name="Contact" component={Contact}
                 options={{
                     tabBarIcon: ({ focused }) => {
 
