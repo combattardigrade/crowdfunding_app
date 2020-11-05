@@ -213,7 +213,7 @@ class Details extends Component {
 
         <View style={{ marginBottom: 40 }}></View>
         <Text style={[styles.heading, styles.bold]}>Sobre el desarrollador</Text>
-        <Image style={{height: 100, width: 100, borderRadius: 50, marginVertical: 20}} source={{ uri: `${API}picture/${project?.developer?.logoPictureId}` }} />
+        <Image style={{ height: 100, width: 100, borderRadius: 50, marginVertical: 20 }} source={{ uri: `${API}picture/${project?.developer?.logoPictureId}` }} />
         <Text style={[styles.heading, styles.bold]}>{project?.developer?.name}</Text>
         <Text style={[styles.descTxt, { paddingBottom: 0 }]}>
           {project?.developer?.description}
