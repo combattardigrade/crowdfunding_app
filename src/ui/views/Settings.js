@@ -60,6 +60,13 @@ class Settings extends Component {
                         onPress={() => navigation.navigate('BankAccount')}
                     />
                     <ListItem
+                        img={person_24px}
+                        title='Documentos'
+                        subtitle={user?.documentsStatus === 'COMPLETED' ? 'Completedo' : 'Pendiente'}
+                        blue={user?.documentsStatus === 'COMPLETED' ? true : false}
+                        onPress={() => navigation.navigate('Documents')}
+                    />
+                    <ListItem
                         img={portrait_24px}
                         title='Conocimiento del inversionista'
                         subtitle={user?.investorKnowledgeStatus === 'COMPLETED' ? 'Completedo' : 'Pendiente'}
